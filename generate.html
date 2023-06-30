@@ -1,0 +1,171 @@
+<html>
+  <body>
+    <div id="generate-container">
+      <input type="text" id="generated" readonly>
+      <button id="copy">      
+      </button>
+    </div>
+    <p>Environment(s)</p>
+    <div id="environment">
+      <input type="checkbox" id="prod" name="prod" value="PROD" checked>
+      <label for="prod">PROD</label>
+      <input type="checkbox" id="uat" name="uat" value="UAT">
+      <label for="uat">UAT</label>
+    </div>
+    <p>Date and Time (UTC)</p>
+    <input type="datetime-local" id="date">
+    
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+      body {
+        width: 320px;
+        padding: 16px;
+        background: #02555b;
+        color: white;
+        text-align: center;
+        box-sizing: border-box;
+        font-family: 'Montserrat', sans-serif;
+      }
+      p {
+        font-size: 12px;
+        margin: 0 0 4px;
+      }
+      input {
+        outline: none;
+      }
+      input[type="checkbox"] {
+        width: 1px;
+        height: 1px;
+        position: absolute;
+        outline: none;
+        pointer-events: none;
+      }
+      input[type="checkbox"] + label {
+        display: block;
+        font-size: 12px;
+        background: #116668;
+        color: #d8a857;
+        border-radius: 12px;
+        flex-basis: 50%;
+        padding: 8px 12px;
+        box-sizing: border-box;
+        cursor: pointer;
+        transition: 150ms;
+      }
+      input[type="checkbox"]:hover + label {
+        background: #053c3d;
+      }
+      input[type="checkbox"]:checked + label {
+        background: #d8a857;
+        color: #02555b;
+        font-weight: bold;
+      }
+      input[type="datetime-local"] {
+        display: block;
+        font-size: 12px;
+        background: #116668;
+        color: #d8a857;
+        border-radius: 12px;
+        width: 100%;
+        padding: 8px 12px;
+        box-sizing: border-box;
+        cursor: pointer;
+        transition: 150ms;
+        font-family: inherit;
+        text-align: center;
+        border: none;
+      }
+      input[type="datetime-local"]:hover, input[type="datetime-local"]:focus {
+        background: #053c3d;
+      }
+      ::-webkit-calendar-picker-indicator {
+        display: none;
+        filter: invert(1);
+      }
+      #environment {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        margin-bottom: 16px;
+      }
+      #generated {
+        display: block;
+        font-size: 16px;
+        background: #116668;
+        color: #d8a857;
+        border-radius: 12px;
+        width: 100%;
+        padding: 8px 12px;
+        box-sizing: border-box;
+        cursor: pointer;
+        transition: 150ms;
+        font-family: inherit;
+        text-align: center;
+        border: none;
+        margin-bottom: 20px;
+      }
+      #generated:hover, #generated:focus {
+        background: #053c3d;
+      }
+      #generate-container {
+        position: relative;
+      }
+      #copy {
+        position: absolute;
+        top: 4px;
+        right: 4px;
+        bottom: 4px;
+        aspect-ratio: 1 / 1;
+        border-radius: 8px;
+        border: none;
+        outline: none;
+        background: #2d7a78;
+        transition: 150ms;
+        cursor: pointer;
+        overflow: hidden;
+        padding: 0;
+      }
+      #copy:hover, #copy:focus {
+        background: #02555b;
+      }
+      #copy.green {
+        background: #d8a857;
+        color: #02555b;
+      }
+      #copy::before {
+        content: '';
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23d8a857' class='w-6 h-6'%3E%3Cpath fill-rule='evenodd' d='M17.663 3.118c.225.015.45.032.673.05C19.876 3.298 21 4.604 21 6.109v9.642a3 3 0 01-3 3V16.5c0-5.922-4.576-10.775-10.384-11.217.324-1.132 1.3-2.01 2.548-2.114.224-.019.448-.036.673-.051A3 3 0 0113.5 1.5H15a3 3 0 012.663 1.618zM12 4.5A1.5 1.5 0 0113.5 3H15a1.5 1.5 0 011.5 1.5H12z' clip-rule='evenodd' /%3E%3Cpath d='M3 8.625c0-1.036.84-1.875 1.875-1.875h.375A3.75 3.75 0 019 10.5v1.875c0 1.036.84 1.875 1.875 1.875h1.875A3.75 3.75 0 0116.5 18v2.625c0 1.035-.84 1.875-1.875 1.875h-9.75A1.875 1.875 0 013 20.625v-12z' /%3E%3Cpath d='M10.5 10.5a5.23 5.23 0 00-1.279-3.434 9.768 9.768 0 016.963 6.963 5.23 5.23 0 00-3.434-1.279h-1.875a.375.375 0 01-.375-.375V10.5z' /%3E%3C/svg%3E%0A");
+        width: 16px;
+        height: 16px;
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        transition: 150ms;
+      }
+      #copy::after {
+        content: '';
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2302555b' class='w-6 h-6'%3E%3Cpath fill-rule='evenodd' d='M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z' clip-rule='evenodd' /%3E%3C/svg%3E%0A");
+        width: 16px;
+        height: 16px;
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, 100%);
+        transition: 150ms;
+        opacity: 0;
+      }
+      #copy.green::before {
+        transform: translate(-50%, -100%);
+        opacity: 0;
+      }
+      #copy.green::after {
+        transform: translate(-50%, -50%);
+        opacity: 1;
+      } 
+    </style>
+    <script src="generate.js"></script>
+  </body>
+</html>
